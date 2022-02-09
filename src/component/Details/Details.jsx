@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
 
-function Details() {
+function Details({ place }) {
+  console.log(place);
   return (
-    <div>Details</div>
-  )
+    <div>
+      <h1>{place.name}</h1>
+    </div>
+  );
 }
 
 export default Details;

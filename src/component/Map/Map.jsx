@@ -4,10 +4,9 @@ import GoogleMapReact from "google-map-react";
 import React from "react";
 import useStyles from "./styles";
 
-function Map() {
+function Map({ setCoordinates, setBounds, coordinates }) {
   const classes = useStyles();
-  const isMobile = useMediaQuery("(min-width: 600px)");
-  const coordinates = { lat: 0, lng: 0 };
+  const isMobile = useMediaQuery("(min-width: 600px)"); 
   return (
     <div className={classes.mapContainer}>
       <GoogleMapReact
@@ -16,7 +15,11 @@ function Map() {
         center={coordinates}
         defaultZoom={14}
         margin={[50, 50, 50, 50]}
-        onChange={""}
+        onChange={(e) => {
+          console.log(e);
+          setCoordinates({ lat: e.center.lat, lng: e.center.lng });
+          setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
+        }}
         options={""}
         onChildClick={""}
       ></GoogleMapReact>
