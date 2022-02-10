@@ -11,10 +11,17 @@ import React, { useState, useEffect, createRef } from "react";
 import useStyles from "./styles";
 import Details from "../Details/Details";
 
-function List({ places, childClicked, isLoading }) {
+function List({
+  places,
+  childClicked,
+  isLoading,
+  type,
+  setType,
+  rating,
+  setRating,
+}) {
   const classes = useStyles();
-  const [Type, setType] = useState("restaurants");
-  const [Rating, setRating] = useState("");
+
   const [elRefs, setElRefs] = useState([]);
 
   useEffect(() => {
@@ -38,7 +45,7 @@ function List({ places, childClicked, isLoading }) {
         <div>
           <FormControl className={classes.formControl}>
             <InputLabel>Type</InputLabel>
-            <Select value={Type} onChange={(e) => setType(e.target.value)}>
+            <Select value={type} onChange={(e) => setType(e.target.value)}>
               <MenuItem value="restaurants">Restaurants</MenuItem>
               <MenuItem value="hotels">Hotels</MenuItem>
               <MenuItem value="attractions">Attractions</MenuItem>
@@ -46,7 +53,7 @@ function List({ places, childClicked, isLoading }) {
           </FormControl>
           <FormControl className={classes.formControl}>
             <InputLabel>Rating</InputLabel>
-            <Select value={Rating} onChange={(e) => setRating(e.target.value)}>
+            <Select value={rating} onChange={(e) => setRating(e.target.value)}>
               <MenuItem value={0}>All</MenuItem>
               <MenuItem value={3}>Above 3.0</MenuItem>
               <MenuItem value={4}>Above 4.0</MenuItem>
