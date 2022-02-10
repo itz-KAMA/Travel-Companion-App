@@ -4,6 +4,7 @@ import Rating from "@material-ui/lab/Rating";
 import GoogleMapReact from "google-map-react";
 import React from "react";
 import useStyles from "./styles";
+import mapStyles from "./mapStyles";
 
 function Map({
   setCoordinates,
@@ -11,6 +12,7 @@ function Map({
   coordinates,
   places,
   setChildClicked,
+  weatherData,
 }) {
   const classes = useStyles();
   const isDesktop = useMediaQuery("(min-width: 600px)");
@@ -28,7 +30,11 @@ function Map({
           setCoordinates({ lat: e.center.lat, lng: e.center.lng });
           setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
         }}
-        options={""}
+        options={{
+          disableDefaultUi: true,
+          zoomControl: true,
+          styles: mapStyles,
+        }}
         onChildClick={(child) => setChildClicked(child)}
       >
         {places?.map((place, i) => (
@@ -61,6 +67,13 @@ function Map({
                 <Rating size="small" value={Number(place.rating)} readOnly />
               </Paper>
             )}
+          </div>
+        ))}
+        {weatherData?.list?.map((data, i) => (
+          <div key={i} lat={data.coord.lat} lng={data.coord.lon}>
+            <img
+              src={`https://openweathermap.org/img/w/${data.weather[0].icon}.png`}
+            />
           </div>
         ))}
       </GoogleMapReact>
