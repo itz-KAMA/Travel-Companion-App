@@ -2,7 +2,7 @@ import { Paper, Typography, useMediaQuery } from "@material-ui/core";
 import { LocationOnOutlined } from "@material-ui/icons";
 import Rating from "@material-ui/lab/Rating";
 import GoogleMapReact from "google-map-react";
-import React, { useState } from "react";
+import React from "react";
 import useStyles from "./styles";
 
 function Map({
